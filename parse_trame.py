@@ -19,6 +19,7 @@ def is_hexa(byte):
     try:
         dec_byte = int("0x" + byte, 16)
     except:
+        print("hexa")
         error = True
     return not error
 
@@ -28,6 +29,7 @@ def is_new_trame(byte):
     try:
         dec_byte = int("0x" + byte, 16)
     except:
+        print("is new")
         error = True
     return dec_byte == 0
 
@@ -37,6 +39,7 @@ def is_valid_offset(byte, oldOffset, readByte):
     try:
         dec_byte = int("0x" + byte, 16)
     except:
+        print("is valid")
         error = True
     # print("dec_byte :" + str(dec_byte) + " oldOffset : " + str(oldOffset))
     # print(curOffset)
@@ -60,7 +63,8 @@ def get_clean_trame(file="./trames/trameEntree.txt"):
 
         for line in fd:
             nb_line += 1
-            splitted = line.split(" ")
+            splitted = line.split()
+            print(splitted)
             isOffset = True
             for byte in splitted:  # check if offset is good
                 # check validite de l'offset et si nouvelle trame
@@ -77,7 +81,7 @@ def get_clean_trame(file="./trames/trameEntree.txt"):
                     else:
                         print("Invalid offset line " + str(nb_line))
                         invalid_line = True
-                        break
+                        return
                 # recuperation byte
                 byte = cleanByte(byte)
                 if not is_hexa(byte) or (len(byte) != 2 and not isOffset):

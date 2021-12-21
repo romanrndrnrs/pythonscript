@@ -4,8 +4,8 @@ import Paquet
 import time
 
 dhcp_type = {} 
-NORMPATH = "./pythonScript/normes/"
-OUTPUTPATH = "./pythonScript/output/"
+NORMPATH = "./normes/"
+OUTPUTPATH = "./output/"
 
 with open(NORMPATH+"DHCP_type.csv", "r")as dchpf:
     dchpf.readline()

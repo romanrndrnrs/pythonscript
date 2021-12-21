@@ -2,10 +2,10 @@ from parse_trame import *
 from Trame import *
 from Trace import *
 
-outputCleanTrame(cleanStrTrame=get_clean_trame(file="./pythonScript/trace.txt"),file="./pythonScript/cleanTrace.txt")
+outputCleanTrame(cleanStrTrame=get_clean_trame(file="./dns-mine.txt"),file="./cleanTrace.txt")
 Trame.initId()
 trace = []
-with open("./pythonScript/cleanTrace.txt", "r") as cleanTrame:
+with open("./cleanTrace.txt", "r") as cleanTrame:
     for line in cleanTrame:
         trace.append(Trame(line))
     cleanTrame.close()

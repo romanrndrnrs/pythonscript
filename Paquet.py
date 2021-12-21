@@ -1,7 +1,7 @@
 from utils import toIpAdress
 from Datagramme import Datagramme
 import json
-NORMPATH = "./pythonScript/normes/"
+NORMPATH = "./normes/"
 with open(NORMPATH+"protocol.txt", "r") as protf:
     protf.readline()
     tempProtType = []

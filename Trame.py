@@ -1,8 +1,8 @@
 import json
 from Paquet import Paquet
 from utils import *
-NORMPATH = "./pythonScript/normes/"
-OUTPUTPATH = "./pythonScript/output/"
+NORMPATH = "./normes/"
+OUTPUTPATH = "./output/"
 with open(NORMPATH+"ethtype.txt", "r")as ethtf:
     ethtf.readline()
     tempEthType = []
