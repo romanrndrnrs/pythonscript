@@ -1,0 +1,25 @@
+Number Name
+0 EOOL   - End of Options List
+1 NOP    - No Operation
+2 SEC    - Security
+3 LSR    - Loose Source Route
+4 TS     - Time Stamp
+5 E-SEC  - Extended Security
+6 CIPSO  - Commercial Security
+7 RR     - Record Route
+8 SID    - Stream ID
+9 SSR    - Strict Source Route
+10 ZSU    - Experimental Measurement
+11 MTUP   - MTU Probe
+12 MTUR   - MTU Reply
+13 FINN   - Experimental Flow Control
+14 VISA   - Experimental Access Control
+16 IMITD  - IMI Traffic Descriptor
+17 EIP    - Extended Internet Protocol
+18 TR     - Traceroute
+19 ADDEXT - Address Extension
+20 RTRALT - Router Alert
+21 SDB    - Selective Directed Broadcast
+23 DPS    - Dynamic Packet State
+24 UMP    - Upstream Multicast Pkt.
+25 QS     - Quick-Start
