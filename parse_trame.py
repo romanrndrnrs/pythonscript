@@ -94,6 +94,7 @@ def get_clean_trame(file="./trames/trameEntree.txt"):
             else:
                 invalid_line = False
     fd.close()
+    print(result)
     return result
     
 # get_clean_trame()

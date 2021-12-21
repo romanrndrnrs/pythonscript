@@ -8,7 +8,7 @@ def toIpAdress(hexIp):
         res = res + str(int("0x"+hexIp[6:8], 16))
         return res
     else:
-        print("Mauvaise taille hexa pour IP")
+        console.log("Erreur: Mauvaise taille hexa pour IP")
         return False
 
 def hexToMac(hexMac):
@@ -17,5 +17,18 @@ def hexToMac(hexMac):
             ":" + hexMac[6:8] + ":" + hexMac[8:10] + ":" + hexMac[10:12]
         return res
     else:
-        print("Erreur : mauvaise taille d'adresse mac : {}".format(len(hexMac)))
+        console.log("Erreur : mauvaise taille d'adresse mac : {}".format(len(hexMac)))
         return False
+
+def get_ascii(str):
+    res = ""
+    i = 0
+    while(i < len(str)):
+        curr = str[i : i + 2]
+        if (curr == "00"):
+            break
+        res += chr(int("0x" + curr, 16))
+        i += 2
+    return res
+
+# print(get_ascii("30313233343500000000000031231"))

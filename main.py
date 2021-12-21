@@ -2,7 +2,7 @@ from parse_trame import *
 from Trame import *
 from Trace import *
 
-outputCleanTrame(cleanStrTrame=get_clean_trame(file="./dns-mine.txt"),file="./cleanTrace.txt")
+outputCleanTrame(cleanStrTrame=get_clean_trame(file="./dhcp-nocom.txt"),file="./cleanTrace.txt")
 Trame.initId()
 trace = []
 with open("./cleanTrace.txt", "r") as cleanTrame:
