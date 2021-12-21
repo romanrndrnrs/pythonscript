@@ -11,7 +11,7 @@ with open("./cleanTrace.txt", "r") as cleanTrame:
     cleanTrame.close()
 try:
     traceObj = Trace(trace)
-    with open("./output.json","w") as output:
+    with open("./output.json","w", encoding="utf-8") as output:
         output.write(traceObj.toDictStr())
     #print(traceObj.toJson())
 except:

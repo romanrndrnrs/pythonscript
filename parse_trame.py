@@ -83,7 +83,7 @@ def get_clean_trame(file="./trames/trameEntree.txt"):
                         invalid_line = True
                         return
                 # recuperation byte
-                byte = cleanByte(byte)
+                # byte = cleanByte(byte)
                 if not is_hexa(byte) or (len(byte) != 2 and not isOffset):
                     continue
                 result += byte

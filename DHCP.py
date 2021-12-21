@@ -4,8 +4,8 @@ import Paquet
 import time
 
 dhcp_type = {} 
-NORMPATH = "./normes/"
-OUTPUTPATH = "./output/"
+NORMPATH = "./pythonScript/normes/"
+OUTPUTPATH = "./pythonScript/output/"
 
 with open(NORMPATH+"DHCP_type.csv", "r")as dchpf:
     dchpf.readline()
@@ -49,21 +49,12 @@ class DHCP:
         self.giaddr = self.dhcp[48:56]
         self.chaddr = self.dhcp[56:68]
         self.chap = self.dhcp[68:88]
-        self.sname = self.dhcp[88:216]
-        self.file = self.dhcp[216:472]
+        self.sname = get_ascii(dhcp[88:216])
+        self.file = get_ascii(dhcp[216:472])
         self.magicCookie = self.dhcp[472:480]
-        self.option = self.get_option(dhcp[480:])
+        self.option, next = self.get_option(dhcp[480:])
         self.dhcp_type_name = self.get_dhcp_type_name(self.option)
-        # i = len(dhcp)
-        # while (True):
-        #     i -= 2
-        #     if(dhcp[i : i + 2] != "ff"):
-        #         break
-        #     # print(dhcp[i : i + 2])
-        # print("here")
-        # print(self.option)
-        # self.padding = dhcp[i + 2:]
-        self.padding = "" 
+        self.padding = self.dhcp[480 + next:] 
 
     def get_dhcp_type_name(self, option):
         for (type, len, content) in option :
@@ -84,7 +75,7 @@ class DHCP:
             if (type == 255):
                 break
             i += length*2
-        return ret
+        return ret, i
             
     def flagToString(self, hex):
         valBin = bin(int("0x" + hex, 16))[2:]
@@ -208,11 +199,11 @@ class DHCP:
         res += "\tRelay agent IP address : {}\n".format(toIpAdress(self.giaddr))
         res += "\tClient MAC address : {}\n".format(hexToMac(self.chaddr))
         res += "\tClient hardware address padding : {}\n".format(self.chap)
-        res += "\tServer host name not given \n" # add ascii analyser
-        res += "\tBoot file name not  given\n" # add ascii analyser
+        res += "\tServer host name: {}\n".format("not given" if self.sname == "" else self.sname) 
+        res += "\tBoot file name : {}\n".format("not given" if self.file == "" else self.file)
         res += "\tMagic cookie: DHCP\n".format("DHCP" if self.magicCookie == "63825363" else "Bootp not supported")
         res += self.option_interpret(self.option)
-        res += "\tPadding: {}".format(self.padding)
+        res += "\tPadding: {}\n".format(self.padding)
         return res
 
     def toDict(self):
@@ -230,14 +221,15 @@ class DHCP:
         dictStr += '"Relay agent IP address" : "{}",'.format(toIpAdress(self.giaddr))
         dictStr += '"Client MAC address" : "{}",'.format(hexToMac(self.chaddr))
         dictStr += '"Client hardware address padding" : "{}",'.format(self.chap)
-        #dictStr += '"Server host name not given"' # add ascii analyser
-        #dictStr += '"Boot file name not  given"' # add ascii analyser
+        dictStr += '"Server host name": "{}",'.format("not given" if self.sname == "" else self.sname) 
+        dictStr += '"Boot file name" : "{}",'.format("not given" if self.file == "" else self.file)
         dictStr += '"Magic cookie": "{}",'.format("DHCP" if self.magicCookie == "63825363" else "Bootp not supported")
         dictStr += self.option_interpret_Dict(self.option)
-        print(self.option_interpret_Dict(self.option))
-        print(dictStr)
+        # print(self.option_interpret_Dict(self.option))
+        # print(dictStr)
         # dictStr += '"Padding": "{}"}}'.format(self.padding)
-        dictStr += '"Padding": "00"}'
+        dictStr += '"Padding": "{}"'.format(self.padding)
+        dictStr += "}"
         # print(self.toString())
         return dictStr
     
